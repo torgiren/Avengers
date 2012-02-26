@@ -5,5 +5,5 @@ Avengers_SOURCES = main.cpp\
 					loader.cpp loader.h\
 					graphengine.cpp graphengine.h
 					exception.h
-Avengers_LDFLAGS = -lSDL
+Avengers_LDFLAGS = -lSDL -lGL
 Avengers_CXXFLAGS = -Wall
