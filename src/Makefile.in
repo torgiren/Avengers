@@ -47,7 +47,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_Avengers_OBJECTS = Avengers-main.$(OBJEXT) \
 	Avengers-object.$(OBJEXT) Avengers-staticobject.$(OBJEXT) \
-	Avengers-loader.$(OBJEXT)
+	Avengers-loader.$(OBJEXT) Avengers-graphengine.$(OBJEXT)
 Avengers_OBJECTS = $(am_Avengers_OBJECTS)
 Avengers_LDADD = $(LDADD)
 Avengers_LINK = $(CXXLD) $(Avengers_CXXFLAGS) $(CXXFLAGS) \
@@ -161,7 +161,7 @@ Avengers_SOURCES = main.cpp\
 					object.cpp object.h\
 					staticobject.cpp staticobject.h\
 					loader.cpp loader.h\
-					exception.h
+					graphengine.cpp graphengine.h
 
 Avengers_LDFLAGS = -lSDL
 Avengers_CXXFLAGS = -Wall
@@ -246,6 +246,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-graphengine.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-loader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-object.Po@am__quote@
@@ -320,6 +321,20 @@ Avengers-loader.obj: loader.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='loader.cpp' object='Avengers-loader.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-loader.obj `if test -f 'loader.cpp'; then $(CYGPATH_W) 'loader.cpp'; else $(CYGPATH_W) '$(srcdir)/loader.cpp'; fi`
+
+Avengers-graphengine.o: graphengine.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-graphengine.o -MD -MP -MF $(DEPDIR)/Avengers-graphengine.Tpo -c -o Avengers-graphengine.o `test -f 'graphengine.cpp' || echo '$(srcdir)/'`graphengine.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-graphengine.Tpo $(DEPDIR)/Avengers-graphengine.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='graphengine.cpp' object='Avengers-graphengine.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-graphengine.o `test -f 'graphengine.cpp' || echo '$(srcdir)/'`graphengine.cpp
+
+Avengers-graphengine.obj: graphengine.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-graphengine.obj -MD -MP -MF $(DEPDIR)/Avengers-graphengine.Tpo -c -o Avengers-graphengine.obj `if test -f 'graphengine.cpp'; then $(CYGPATH_W) 'graphengine.cpp'; else $(CYGPATH_W) '$(srcdir)/graphengine.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-graphengine.Tpo $(DEPDIR)/Avengers-graphengine.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='graphengine.cpp' object='Avengers-graphengine.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-graphengine.obj `if test -f 'graphengine.cpp'; then $(CYGPATH_W) 'graphengine.cpp'; else $(CYGPATH_W) '$(srcdir)/graphengine.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -519,6 +534,7 @@ uninstall-am: uninstall-binPROGRAMS
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS
 
+					exception.h
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

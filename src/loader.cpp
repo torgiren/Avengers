@@ -9,7 +9,7 @@ Loader::Loader(std::string path) throw (file_open_error)
 };
 Loader::~Loader()
 {
-	delete itsLine;
+	delete [] itsLine;
 };
 std::string Loader::GetLine()
 {
