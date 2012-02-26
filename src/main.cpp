@@ -10,7 +10,7 @@ int main()
 	GraphEngine *graph=GraphEngine::GetInstance();
 	graph->Reconfig();
 	SDL_Delay(3000);
-	graph->SetFullscreen(-1);
+	graph->SetResolution(1280,768);
 	graph->Reconfig();
 	SDL_Delay(3000);
 	return 0;

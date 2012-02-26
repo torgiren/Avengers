@@ -26,12 +26,16 @@ bool GraphEngine::Reconfig()
 };
 void GraphEngine::SetFullscreen(int full)
 {
-	if(full=-1)
-	{
+	if(full==-1)
 		itsFullscreen=!itsFullscreen;	
-	}
 	else
-	{	
 		itsFullscreen=full;
-	};
+};
+void GraphEngine::SetResolution(std::pair<int,int> res)
+{
+	itsResolution=res;
+};
+void GraphEngine::SetResolution(int width, int height)
+{
+	SetResolution(std::pair<int,int>(width,height));	
 };
