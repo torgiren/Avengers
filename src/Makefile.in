@@ -46,9 +46,11 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_Avengers_OBJECTS = main.$(OBJEXT) object.$(OBJEXT) \
-	staticobject.$(OBJEXT)
+	staticobject.$(OBJEXT) loader.$(OBJEXT)
 Avengers_OBJECTS = $(am_Avengers_OBJECTS)
 Avengers_LDADD = $(LDADD)
+Avengers_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
+	$(Avengers_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -157,8 +159,9 @@ top_srcdir = @top_srcdir@
 Avengers_SOURCES = main.cpp\
 					object.cpp object.h\
 					staticobject.cpp staticobject.h\
-Avengers_LDFLAGS = -lSDL
+					loader.cpp loader.h
 
+Avengers_LDFLAGS = -lSDL
 all: all-am
 
 .SUFFIXES:
@@ -232,7 +235,7 @@ clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 Avengers$(EXEEXT): $(Avengers_OBJECTS) $(Avengers_DEPENDENCIES) 
 	@rm -f Avengers$(EXEEXT)
-	$(CXXLINK) $(Avengers_OBJECTS) $(Avengers_LDADD) $(LIBS)
+	$(Avengers_LINK) $(Avengers_OBJECTS) $(Avengers_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -240,6 +243,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/loader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/object.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/staticobject.Po@am__quote@
