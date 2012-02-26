@@ -45,11 +45,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_Avengers_OBJECTS = main.$(OBJEXT) object.$(OBJEXT) \
-	staticobject.$(OBJEXT) loader.$(OBJEXT)
+am_Avengers_OBJECTS = Avengers-main.$(OBJEXT) \
+	Avengers-object.$(OBJEXT) Avengers-staticobject.$(OBJEXT) \
+	Avengers-loader.$(OBJEXT)
 Avengers_OBJECTS = $(am_Avengers_OBJECTS)
 Avengers_LDADD = $(LDADD)
-Avengers_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
+Avengers_LINK = $(CXXLD) $(Avengers_CXXFLAGS) $(CXXFLAGS) \
 	$(Avengers_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -159,9 +160,11 @@ top_srcdir = @top_srcdir@
 Avengers_SOURCES = main.cpp\
 					object.cpp object.h\
 					staticobject.cpp staticobject.h\
-					loader.cpp loader.h
+					loader.cpp loader.h\
+					exception.h
 
 Avengers_LDFLAGS = -lSDL
+Avengers_CXXFLAGS = -Wall
 all: all-am
 
 .SUFFIXES:
@@ -243,10 +246,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/loader.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/object.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/staticobject.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-loader.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-object.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-staticobject.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -261,6 +264,62 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+Avengers-main.o: main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-main.o -MD -MP -MF $(DEPDIR)/Avengers-main.Tpo -c -o Avengers-main.o `test -f 'main.cpp' || echo '$(srcdir)/'`main.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-main.Tpo $(DEPDIR)/Avengers-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='main.cpp' object='Avengers-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-main.o `test -f 'main.cpp' || echo '$(srcdir)/'`main.cpp
+
+Avengers-main.obj: main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-main.obj -MD -MP -MF $(DEPDIR)/Avengers-main.Tpo -c -o Avengers-main.obj `if test -f 'main.cpp'; then $(CYGPATH_W) 'main.cpp'; else $(CYGPATH_W) '$(srcdir)/main.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-main.Tpo $(DEPDIR)/Avengers-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='main.cpp' object='Avengers-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-main.obj `if test -f 'main.cpp'; then $(CYGPATH_W) 'main.cpp'; else $(CYGPATH_W) '$(srcdir)/main.cpp'; fi`
+
+Avengers-object.o: object.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-object.o -MD -MP -MF $(DEPDIR)/Avengers-object.Tpo -c -o Avengers-object.o `test -f 'object.cpp' || echo '$(srcdir)/'`object.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-object.Tpo $(DEPDIR)/Avengers-object.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='object.cpp' object='Avengers-object.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-object.o `test -f 'object.cpp' || echo '$(srcdir)/'`object.cpp
+
+Avengers-object.obj: object.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-object.obj -MD -MP -MF $(DEPDIR)/Avengers-object.Tpo -c -o Avengers-object.obj `if test -f 'object.cpp'; then $(CYGPATH_W) 'object.cpp'; else $(CYGPATH_W) '$(srcdir)/object.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-object.Tpo $(DEPDIR)/Avengers-object.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='object.cpp' object='Avengers-object.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-object.obj `if test -f 'object.cpp'; then $(CYGPATH_W) 'object.cpp'; else $(CYGPATH_W) '$(srcdir)/object.cpp'; fi`
+
+Avengers-staticobject.o: staticobject.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-staticobject.o -MD -MP -MF $(DEPDIR)/Avengers-staticobject.Tpo -c -o Avengers-staticobject.o `test -f 'staticobject.cpp' || echo '$(srcdir)/'`staticobject.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-staticobject.Tpo $(DEPDIR)/Avengers-staticobject.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='staticobject.cpp' object='Avengers-staticobject.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-staticobject.o `test -f 'staticobject.cpp' || echo '$(srcdir)/'`staticobject.cpp
+
+Avengers-staticobject.obj: staticobject.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-staticobject.obj -MD -MP -MF $(DEPDIR)/Avengers-staticobject.Tpo -c -o Avengers-staticobject.obj `if test -f 'staticobject.cpp'; then $(CYGPATH_W) 'staticobject.cpp'; else $(CYGPATH_W) '$(srcdir)/staticobject.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-staticobject.Tpo $(DEPDIR)/Avengers-staticobject.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='staticobject.cpp' object='Avengers-staticobject.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-staticobject.obj `if test -f 'staticobject.cpp'; then $(CYGPATH_W) 'staticobject.cpp'; else $(CYGPATH_W) '$(srcdir)/staticobject.cpp'; fi`
+
+Avengers-loader.o: loader.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-loader.o -MD -MP -MF $(DEPDIR)/Avengers-loader.Tpo -c -o Avengers-loader.o `test -f 'loader.cpp' || echo '$(srcdir)/'`loader.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-loader.Tpo $(DEPDIR)/Avengers-loader.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='loader.cpp' object='Avengers-loader.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-loader.o `test -f 'loader.cpp' || echo '$(srcdir)/'`loader.cpp
+
+Avengers-loader.obj: loader.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -MT Avengers-loader.obj -MD -MP -MF $(DEPDIR)/Avengers-loader.Tpo -c -o Avengers-loader.obj `if test -f 'loader.cpp'; then $(CYGPATH_W) 'loader.cpp'; else $(CYGPATH_W) '$(srcdir)/loader.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Avengers-loader.Tpo $(DEPDIR)/Avengers-loader.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='loader.cpp' object='Avengers-loader.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-loader.obj `if test -f 'loader.cpp'; then $(CYGPATH_W) 'loader.cpp'; else $(CYGPATH_W) '$(srcdir)/loader.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
