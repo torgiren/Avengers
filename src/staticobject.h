@@ -3,5 +3,9 @@
 #include "object.h"
 class StaticObject: public Object
 {
+public:
+	StaticObject();
+	std::vector<Vertex> RetVertexes();
+private:
 };
 #endif
