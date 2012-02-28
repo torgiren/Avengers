@@ -5,7 +5,7 @@ class StaticObject: public Object
 {
 public:
 	StaticObject();
-	std::vector<Vertex> RetVertexes();
+//	std::vector<Vertex> RetVertexes();
 private:
 };
 #endif

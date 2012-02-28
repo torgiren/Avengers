@@ -1,4 +1,5 @@
 #include "graphengine.h"
+#include "GL/glu.h"
 GraphEngine::GraphEngine() throw(graph_init_error):
 	itsFullscreen(false),
 	itsScreen(false)
@@ -30,10 +31,11 @@ bool GraphEngine::Reconfig()
 	glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 	glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );
 	glEnable(GL_DEPTH_TEST);
-	//TODO Ulepszyć obsługę glOthod
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
-	glOrtho(0.0f, itsResolution[0], itsResolution[1], 0.0f, -1.0f, 1.0f);
+	float ratio=(float)itsResolution[0]/(float)itsResolution[1];
+	gluPerspective( 60.0, ratio, 1.0, 1024.0 );
+//	glOrtho(0.0f, itsResolution[0], itsResolution[1], 0.0f, -1.0f, 1.0f);
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity();
 	return true;
@@ -56,4 +58,28 @@ void GraphEngine::SetViewport(int x, int y, int width, int height)
 	itsViewport[1]=y;
 	itsViewport[2]=width;
 	itsViewport[3]=height;	
+};
+void GraphEngine::BoneDrawer::Draw() const
+{
+	Draw(itsObj->itsHead);		
+	itsObj->PrintBones();
+};
+void GraphEngine::BoneDrawer::Draw(BoneObject::Bone* bone) const
+{
+	glPushMatrix();
+	glTranslatef(0,bone->itsDl,0);
+	glRotatef(bone->itsRot.RetZ(),0,0,1);
+	glRotatef(bone->itsRot.RetY(),0,1,0);
+	glRotatef(bone->itsRot.RetX(),1,0,0);
+//	glTranslatef(0,bone->itsDl/2,0);
+	glBegin( GL_QUADS );
+		glVertex3f( -0.02f, 0.f, 0.0f );
+		glVertex3f( 0.02f, 0.f, 0.f );
+		glVertex3f( 0.02f, bone->itsDl, 0.f );
+		glVertex3f( -0.02f, bone->itsDl, 0.f );
+	glEnd();
+	std::list<BoneObject::Bone*>::iterator iter;
+	for(iter=bone->itsChildren.begin();iter!=bone->itsChildren.end();iter++)
+		Draw(*iter);
+	glPopMatrix();
 };

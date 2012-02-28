@@ -12,7 +12,6 @@ protected:
 public:
 	Object();
 	const Vertex& RetPos() const;
-	virtual std::vector<Vertex> RetVertexes() const =0;
 private:
 protected:
 	Vertex itsPos;

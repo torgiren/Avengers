@@ -5,4 +5,5 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile src/Makefile])
 AC_CHECK_LIB(SDL,main)
 AC_CHECK_LIB(GL,main)
+AC_CHECK_LIB(GLU,main)
 AC_OUTPUT

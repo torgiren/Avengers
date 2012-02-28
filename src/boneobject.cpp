@@ -4,11 +4,11 @@ BoneObject::BoneObject()
 {
 	itsHead=new Bone();
 	Bone* tmp=new Bone();
-	tmp->itsRot.SetX(5);
+	tmp->itsRot.SetZ(45);
 	tmp->itsChildren.push_back(new Bone());
 	itsHead->itsChildren.push_back(tmp);
 	tmp=new Bone();
-	tmp->itsRot.SetY(10);
+	tmp->itsRot.SetZ(-90);
 	itsHead->itsChildren.push_back(tmp);
 };
 void BoneObject::PrintBones() const
