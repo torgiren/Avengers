@@ -32,7 +32,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = Avengers$(EXEEXT)
+bin_PROGRAMS = Avengers$(EXEEXT) Editor$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -53,6 +53,14 @@ Avengers_OBJECTS = $(am_Avengers_OBJECTS)
 Avengers_LDADD = $(LDADD)
 Avengers_LINK = $(CXXLD) $(Avengers_CXXFLAGS) $(CXXFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+am_Editor_OBJECTS = Editor-main.$(OBJEXT) Editor-object.$(OBJEXT) \
+	Editor-staticobject.$(OBJEXT) Editor-loader.$(OBJEXT) \
+	Editor-graphengine.$(OBJEXT) Editor-vertex.$(OBJEXT) \
+	Editor-boneobject.$(OBJEXT)
+Editor_OBJECTS = $(am_Editor_OBJECTS)
+Editor_LDADD = $(LDADD)
+Editor_LINK = $(CXXLD) $(Editor_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -66,8 +74,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(Avengers_SOURCES)
-DIST_SOURCES = $(Avengers_SOURCES)
+SOURCES = $(Avengers_SOURCES) $(Editor_SOURCES)
+DIST_SOURCES = $(Avengers_SOURCES) $(Editor_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -166,7 +174,16 @@ Avengers_SOURCES = main.cpp exceptions.h\
 					vertex.h vertex.cpp\
 					boneobject.h boneobject.cpp
 
+Editor_SOURCES = main.cpp exceptions.h\
+					object.cpp object.h\
+					staticobject.cpp staticobject.h\
+					loader.cpp loader.h\
+					graphengine.cpp graphengine.h\
+					vertex.h vertex.cpp\
+					boneobject.h boneobject.cpp
+
 Avengers_CXXFLAGS = -Wall
+Editor_CXXFLAGS = -Wall
 all: all-am
 
 .SUFFIXES:
@@ -241,6 +258,9 @@ clean-binPROGRAMS:
 Avengers$(EXEEXT): $(Avengers_OBJECTS) $(Avengers_DEPENDENCIES) 
 	@rm -f Avengers$(EXEEXT)
 	$(Avengers_LINK) $(Avengers_OBJECTS) $(Avengers_LDADD) $(LIBS)
+Editor$(EXEEXT): $(Editor_OBJECTS) $(Editor_DEPENDENCIES) 
+	@rm -f Editor$(EXEEXT)
+	$(Editor_LINK) $(Editor_OBJECTS) $(Editor_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -255,6 +275,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-object.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-staticobject.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Avengers-vertex.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Editor-boneobject.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Editor-graphengine.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Editor-loader.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Editor-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Editor-object.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Editor-staticobject.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Editor-vertex.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -367,6 +394,104 @@ Avengers-boneobject.obj: boneobject.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='boneobject.cpp' object='Avengers-boneobject.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Avengers_CXXFLAGS) $(CXXFLAGS) -c -o Avengers-boneobject.obj `if test -f 'boneobject.cpp'; then $(CYGPATH_W) 'boneobject.cpp'; else $(CYGPATH_W) '$(srcdir)/boneobject.cpp'; fi`
+
+Editor-main.o: main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-main.o -MD -MP -MF $(DEPDIR)/Editor-main.Tpo -c -o Editor-main.o `test -f 'main.cpp' || echo '$(srcdir)/'`main.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-main.Tpo $(DEPDIR)/Editor-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='main.cpp' object='Editor-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-main.o `test -f 'main.cpp' || echo '$(srcdir)/'`main.cpp
+
+Editor-main.obj: main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-main.obj -MD -MP -MF $(DEPDIR)/Editor-main.Tpo -c -o Editor-main.obj `if test -f 'main.cpp'; then $(CYGPATH_W) 'main.cpp'; else $(CYGPATH_W) '$(srcdir)/main.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-main.Tpo $(DEPDIR)/Editor-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='main.cpp' object='Editor-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-main.obj `if test -f 'main.cpp'; then $(CYGPATH_W) 'main.cpp'; else $(CYGPATH_W) '$(srcdir)/main.cpp'; fi`
+
+Editor-object.o: object.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-object.o -MD -MP -MF $(DEPDIR)/Editor-object.Tpo -c -o Editor-object.o `test -f 'object.cpp' || echo '$(srcdir)/'`object.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-object.Tpo $(DEPDIR)/Editor-object.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='object.cpp' object='Editor-object.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-object.o `test -f 'object.cpp' || echo '$(srcdir)/'`object.cpp
+
+Editor-object.obj: object.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-object.obj -MD -MP -MF $(DEPDIR)/Editor-object.Tpo -c -o Editor-object.obj `if test -f 'object.cpp'; then $(CYGPATH_W) 'object.cpp'; else $(CYGPATH_W) '$(srcdir)/object.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-object.Tpo $(DEPDIR)/Editor-object.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='object.cpp' object='Editor-object.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-object.obj `if test -f 'object.cpp'; then $(CYGPATH_W) 'object.cpp'; else $(CYGPATH_W) '$(srcdir)/object.cpp'; fi`
+
+Editor-staticobject.o: staticobject.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-staticobject.o -MD -MP -MF $(DEPDIR)/Editor-staticobject.Tpo -c -o Editor-staticobject.o `test -f 'staticobject.cpp' || echo '$(srcdir)/'`staticobject.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-staticobject.Tpo $(DEPDIR)/Editor-staticobject.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='staticobject.cpp' object='Editor-staticobject.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-staticobject.o `test -f 'staticobject.cpp' || echo '$(srcdir)/'`staticobject.cpp
+
+Editor-staticobject.obj: staticobject.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-staticobject.obj -MD -MP -MF $(DEPDIR)/Editor-staticobject.Tpo -c -o Editor-staticobject.obj `if test -f 'staticobject.cpp'; then $(CYGPATH_W) 'staticobject.cpp'; else $(CYGPATH_W) '$(srcdir)/staticobject.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-staticobject.Tpo $(DEPDIR)/Editor-staticobject.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='staticobject.cpp' object='Editor-staticobject.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-staticobject.obj `if test -f 'staticobject.cpp'; then $(CYGPATH_W) 'staticobject.cpp'; else $(CYGPATH_W) '$(srcdir)/staticobject.cpp'; fi`
+
+Editor-loader.o: loader.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-loader.o -MD -MP -MF $(DEPDIR)/Editor-loader.Tpo -c -o Editor-loader.o `test -f 'loader.cpp' || echo '$(srcdir)/'`loader.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-loader.Tpo $(DEPDIR)/Editor-loader.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='loader.cpp' object='Editor-loader.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-loader.o `test -f 'loader.cpp' || echo '$(srcdir)/'`loader.cpp
+
+Editor-loader.obj: loader.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-loader.obj -MD -MP -MF $(DEPDIR)/Editor-loader.Tpo -c -o Editor-loader.obj `if test -f 'loader.cpp'; then $(CYGPATH_W) 'loader.cpp'; else $(CYGPATH_W) '$(srcdir)/loader.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-loader.Tpo $(DEPDIR)/Editor-loader.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='loader.cpp' object='Editor-loader.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-loader.obj `if test -f 'loader.cpp'; then $(CYGPATH_W) 'loader.cpp'; else $(CYGPATH_W) '$(srcdir)/loader.cpp'; fi`
+
+Editor-graphengine.o: graphengine.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-graphengine.o -MD -MP -MF $(DEPDIR)/Editor-graphengine.Tpo -c -o Editor-graphengine.o `test -f 'graphengine.cpp' || echo '$(srcdir)/'`graphengine.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-graphengine.Tpo $(DEPDIR)/Editor-graphengine.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='graphengine.cpp' object='Editor-graphengine.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-graphengine.o `test -f 'graphengine.cpp' || echo '$(srcdir)/'`graphengine.cpp
+
+Editor-graphengine.obj: graphengine.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-graphengine.obj -MD -MP -MF $(DEPDIR)/Editor-graphengine.Tpo -c -o Editor-graphengine.obj `if test -f 'graphengine.cpp'; then $(CYGPATH_W) 'graphengine.cpp'; else $(CYGPATH_W) '$(srcdir)/graphengine.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-graphengine.Tpo $(DEPDIR)/Editor-graphengine.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='graphengine.cpp' object='Editor-graphengine.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-graphengine.obj `if test -f 'graphengine.cpp'; then $(CYGPATH_W) 'graphengine.cpp'; else $(CYGPATH_W) '$(srcdir)/graphengine.cpp'; fi`
+
+Editor-vertex.o: vertex.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-vertex.o -MD -MP -MF $(DEPDIR)/Editor-vertex.Tpo -c -o Editor-vertex.o `test -f 'vertex.cpp' || echo '$(srcdir)/'`vertex.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-vertex.Tpo $(DEPDIR)/Editor-vertex.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='vertex.cpp' object='Editor-vertex.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-vertex.o `test -f 'vertex.cpp' || echo '$(srcdir)/'`vertex.cpp
+
+Editor-vertex.obj: vertex.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-vertex.obj -MD -MP -MF $(DEPDIR)/Editor-vertex.Tpo -c -o Editor-vertex.obj `if test -f 'vertex.cpp'; then $(CYGPATH_W) 'vertex.cpp'; else $(CYGPATH_W) '$(srcdir)/vertex.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-vertex.Tpo $(DEPDIR)/Editor-vertex.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='vertex.cpp' object='Editor-vertex.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-vertex.obj `if test -f 'vertex.cpp'; then $(CYGPATH_W) 'vertex.cpp'; else $(CYGPATH_W) '$(srcdir)/vertex.cpp'; fi`
+
+Editor-boneobject.o: boneobject.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-boneobject.o -MD -MP -MF $(DEPDIR)/Editor-boneobject.Tpo -c -o Editor-boneobject.o `test -f 'boneobject.cpp' || echo '$(srcdir)/'`boneobject.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-boneobject.Tpo $(DEPDIR)/Editor-boneobject.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='boneobject.cpp' object='Editor-boneobject.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-boneobject.o `test -f 'boneobject.cpp' || echo '$(srcdir)/'`boneobject.cpp
+
+Editor-boneobject.obj: boneobject.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -MT Editor-boneobject.obj -MD -MP -MF $(DEPDIR)/Editor-boneobject.Tpo -c -o Editor-boneobject.obj `if test -f 'boneobject.cpp'; then $(CYGPATH_W) 'boneobject.cpp'; else $(CYGPATH_W) '$(srcdir)/boneobject.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Editor-boneobject.Tpo $(DEPDIR)/Editor-boneobject.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='boneobject.cpp' object='Editor-boneobject.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Editor_CXXFLAGS) $(CXXFLAGS) -c -o Editor-boneobject.obj `if test -f 'boneobject.cpp'; then $(CYGPATH_W) 'boneobject.cpp'; else $(CYGPATH_W) '$(srcdir)/boneobject.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
