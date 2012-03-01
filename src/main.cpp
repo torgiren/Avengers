@@ -21,10 +21,11 @@ void bone()
 };
 int main()
 {
+//	Loader load;
 	GraphEngine *graph=GraphEngine::GetInstance();
 	graph->Reconfig();
 	glTranslatef(0,0,-10);
-	graph->AddObject(new StaticObject());
+//	graph->AddObject(new StaticObject());
 	graph->AddObject(new BoneObject());
 	SDL_Delay(10);
 /*

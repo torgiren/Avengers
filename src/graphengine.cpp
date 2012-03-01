@@ -67,10 +67,10 @@ void GraphEngine::BoneDrawer::Draw() const
 void GraphEngine::BoneDrawer::Draw(BoneObject::Bone* bone) const
 {
 	glPushMatrix();
-	glTranslatef(0,bone->itsDl,0);
+//	glTranslatef(0,bone->itsDl,0);
+	glRotatef(bone->itsRot.RetX(),1,0,0);
 	glRotatef(bone->itsRot.RetZ(),0,0,1);
 	glRotatef(bone->itsRot.RetY(),0,1,0);
-	glRotatef(bone->itsRot.RetX(),1,0,0);
 //	glTranslatef(0,bone->itsDl/2,0);
 	glBegin( GL_QUADS );
 		glVertex3f( -0.02f, 0.f, 0.0f );
@@ -79,7 +79,10 @@ void GraphEngine::BoneDrawer::Draw(BoneObject::Bone* bone) const
 		glVertex3f( -0.02f, bone->itsDl, 0.f );
 	glEnd();
 	std::list<BoneObject::Bone*>::iterator iter;
+	glTranslatef(0,bone->itsDl,0);
 	for(iter=bone->itsChildren.begin();iter!=bone->itsChildren.end();iter++)
+	{
 		Draw(*iter);
+	};
 	glPopMatrix();
 };
